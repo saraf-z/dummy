@@ -1,3 +1,30 @@
 Repositorio de pruebas:
 
+en flow-dummy:
+Pruebas de flujo de funciones
+
+caso 1:
+
+1. Con un set de datos almacenados "x"  y otro set de datos "y" preguntar por pantalla la variable y al usuario (datos numericos)
+2. Almacenar la variable dada y mostrar por pantalla
+
+Caso 2:
+
+1. Con un set de datos almacenados "x"  y otro set de datos "y" preguntar por pantalla la variable y al usuario (datos numericos)
+2. Almacenar la variable dada y mostrar por pantalla
+3. Preguntar por pantalla que tipo de funcion realizar
+4. Tras recibir por pantalla la información, mostrar la eleccion al usuario
+
+Caso 3:
+
+1. Con un set de datos almacenados "x"  y otro set de datos "y" preguntar por pantalla la variable y al usuario (datos numericos)
+2. Almacenar la variable dada y mostrar por pantalla
+3. Preguntar por pantalla que tipo de funcion realizar
+4. Tras recibir por pantalla la información, mostrar la eleccion al usuario
+5. Con:
+     - La variable recibida
+     - La funcion seleccionada
+  Activar el funcionamiento de la funcion pasandole la variable recibida
+  Mostrar el resultado de la operación por pantalla
+
 
