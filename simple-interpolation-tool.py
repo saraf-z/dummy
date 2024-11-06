@@ -59,7 +59,19 @@ try:
          interp_function = interp1d(column1, column2, kind='Akima')
     print ("Akima interpolation selected.")
     else:
-    print("Invalid selection. Please enter 1, 2, or 3.")
-    exit()
+print("Invalid selection. Please enter 1, 2, 3 or 4")
+exit()
 
-#
+#STEP 4 ---------------------------------------------------------------------------------------------------
+###4. ask user for interpolation data input
+while True:
+    try:
+        x_value = float(input("Enter an X value between 1 and 5 for interpolation: "))
+        if 1 <= x_value <= 5:
+            break
+        else:
+                print("Please enter a value between 1 and 5.")
+    except ValueError:
+     print("Invalid input. Please enter a numeric value.")
+#Value to interpolate will be stored in x_value variable
+#STEP 5 -------------------------------------------------------------------------------
