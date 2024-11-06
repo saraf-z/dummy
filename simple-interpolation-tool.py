@@ -11,6 +11,7 @@
 
 #Imports
 import pandas as pd
+from scipy.interpolate import interp1d
 
 #testing
 print('Script interpolator_script.py')
@@ -35,6 +36,30 @@ values = column2  # Variable values of the distribution
 print(f'Energy: {energy}')
 print (f'Values: {values}')
 # Data Read and listed --------------------------------------------------------------------------------------
+#STEP 3 ------------------------------------------------------------------------
+##3. ask user for type of interpolation
+print("Select the interpolation type:")
+print("1 - Linear")
+print("2 - Quadratic")
+print("3 - Cubic")
+print("4 - Akima")
+interpolation_type = input("Enter the number corresponding to the interpolation type: ")
+ #Define interpolation function based on selection
+try:
+    if interpolation_type == '1':
+        interp_function = interp1d(column1, column2, kind='linear')
+        print("Linear interpolation selected.")
+    elif interpolation_type == '2':
+        interp_function = interp1d(column1, column2, kind='quadratic')
+        print("Quadratic interpolation selected.")
+    elif interpolation_type == '3':
+        interp_function = interp1d(column1, column2, kind='cubic')
+        print("Cubic interpolation selected.")
+    elif interpolation_type == '4':
+         interp_function = interp1d(column1, column2, kind='Akima')
+    print ("Akima interpolation selected.")
+    else:
+    print("Invalid selection. Please enter 1, 2, or 3.")
+    exit()
 
-
-
+#
