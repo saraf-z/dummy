@@ -45,22 +45,25 @@ print("3 - Cubic")
 print("4 - Akima")
 interpolation_type = input("Enter the number corresponding to the interpolation type: ")
  #Define interpolation function based on selection
-try:
-    if interpolation_type == '1':
+def select_interpolation(interpolation_type, column1, column2):
+ try:
+     if interpolation_type == '1':
         interp_function = interp1d(column1, column2, kind='linear')
         print("Linear interpolation selected.")
-    elif interpolation_type == '2':
+     elif interpolation_type == '2':
         interp_function = interp1d(column1, column2, kind='quadratic')
         print("Quadratic interpolation selected.")
-    elif interpolation_type == '3':
+     elif interpolation_type == '3':
         interp_function = interp1d(column1, column2, kind='cubic')
         print("Cubic interpolation selected.")
-    elif interpolation_type == '4':
+     elif interpolation_type == '4':
          interp_function = interp1d(column1, column2, kind='Akima')
-    print ("Akima interpolation selected.")
-    else:
-print("Invalid selection. Please enter 1, 2, 3 or 4")
-exit()
+         print ("Akima interpolation selected.")
+     else:
+          print("Invalid selection. Please enter 1, 2, 3 or 4")
+          exit()
+ except Exception as e:
+    print(f"An error occurred: {e}")
 
 #STEP 4 ---------------------------------------------------------------------------------------------------
 ###4. ask user for interpolation data input
@@ -73,5 +76,13 @@ while True:
                 print("Please enter a value between 1 and 5.")
     except ValueError:
      print("Invalid input. Please enter a numeric value.")
+
+print (f'interpolated_energy: {x_value}')
 #Value to interpolate will be stored in x_value variable
+
+# Clean data
+
+
+
 #STEP 5 -------------------------------------------------------------------------------
+#5. convert data to interpolate into logartithms
