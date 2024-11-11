@@ -8,10 +8,10 @@
 #7. convert data to exp scale
 #8. create graph
 #9. show data and graph
-
+import numpy as np
 #Imports
 import pandas as pd
-from scipy.interpolate import interp1d
+from scipy.interpolate import interp1d, Akima1DInterpolator
 
 #testing
 print('Script interpolator_script.py')
@@ -67,22 +67,66 @@ def select_interpolation(interpolation_type, column1, column2):
 
 #STEP 4 ---------------------------------------------------------------------------------------------------
 ###4. ask user for interpolation data input
-while True:
-    try:
-        x_value = float(input("Enter an X value between 1 and 5 for interpolation: "))
-        if 1 <= x_value <= 5:
-            break
-        else:
+def get_x_value():
+    while True:
+     try:
+         x_value = float(input("Enter an X value between 1 and 5 for interpolation: "))
+         if 1 <= x_value <= 5:
+               break
+         else:
                 print("Please enter a value between 1 and 5.")
-    except ValueError:
-     print("Invalid input. Please enter a numeric value.")
+        except ValueError:
+        print("Invalid input. Please enter a numeric value.")
 
-print (f'interpolated_energy: {x_value}')
+    print (f'interpolated_energy: {x_value}')
 #Value to interpolate will be stored in x_value variable
 
 # Clean data
-
-
-
 #STEP 5 -------------------------------------------------------------------------------
-#5. convert data to interpolate into logartithms
+#5. convert data to interpolate into logartithms -----------------
+def log_transform( column_x, column_y, x_value):
+ log_energy = np.log(df[column_x])
+ log_values = np.log(df[column_y])
+ log_x_value = np.log(x_value)
+ return list(log_energy), list(log_values)
+#STEP 6 , 7 and 8---------------------------------------------------------
+#OPERATE! + SHOW GRAPHICS
+
+#1. LINEAR INTERPOLATION
+def linear_interpolation (log_energy, log_values, log_x_value):
+    interpolation_func_1 = interp1d(log_energy, log_values, kind='linear', fill_value="extrapolate")
+    log_interpolated_value = interpolation_func_1(log_x_value)
+    print(f'Interpolated log_value for log_x_value ({log_x_value}): {log_interpolated_value}')
+    return log_interpolated_value
+
+#2. QUADRATIC INTERPOLATION
+def quadratic_interpolation(log_energy, log_values, log_x_value):
+    interpolation_func_2 = interp1d(log_energy, log_values, kind='quadratic', fill_value="extrapolate")
+    log_quadratic_interpolated_value = interpolation_func_2(log_x_value)
+    print(f'Interpolated log_value for log_x_value ({log_x_value}): {log_quadratic_interpolated_value}')
+    return log_quadratic_interpolated_value
+
+#3. CUBIC INTERPOLATION
+def cubic_interpolation(log_energy, log_values, log_x_value):
+    interpolation_func = interp1d(log_energy, log_values, kind='cubic', fill_value="extrapolate")
+    interpolated_value = interpolation_func(log_x_value)
+    print(f'Interpolated log_value for log_x_value ({log_x_value}): {interpolated_value}')
+    return interpolated_value
+
+#4. AKIMA INTERPOLATION
+def akima_interpolation(log_energy, log_values, log_x_value):
+    interpolation_func = Akima1DInterpolator(log_energy, log_values)
+    interpolated_value = interpolation_func(log_x_value)
+    return interpolated_value
+
+#STEP 7 ---------------------------------------------------------------------------------------
+#Log to value
+def exp_linear_interpolation(log_energy, log_values, log_x_value, log_interpolated_value):
+    exp_interpolated_value = np.exp(log_interpolated_value)
+    return exp_interpolated_value
+
+#STEP 8 ---------------------------------------------------------------------------------------
+#Show graphics
+
+
+
