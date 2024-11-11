@@ -11,6 +11,7 @@
 import numpy as np
 #Imports
 import pandas as pd
+from matplotlib import pyplot as plt
 from scipy.interpolate import interp1d, Akima1DInterpolator
 
 #testing
@@ -109,9 +110,9 @@ def quadratic_interpolation(log_energy, log_values, log_x_value):
 #3. CUBIC INTERPOLATION
 def cubic_interpolation(log_energy, log_values, log_x_value):
     interpolation_func = interp1d(log_energy, log_values, kind='cubic', fill_value="extrapolate")
-    interpolated_value = interpolation_func(log_x_value)
-    print(f'Interpolated log_value for log_x_value ({log_x_value}): {interpolated_value}')
-    return interpolated_value
+    log_cubic_interpolated_value = interpolation_func(log_x_value)
+    print(f'Interpolated log_value for log_x_value ({log_x_value}): {log_cubic_interpolated_value}')
+    return log_cubic_interpolated_value
 
 #4. AKIMA INTERPOLATION
 def akima_interpolation(log_energy, log_values, log_x_value):
@@ -119,11 +120,36 @@ def akima_interpolation(log_energy, log_values, log_x_value):
     interpolated_value = interpolation_func(log_x_value)
     return interpolated_value
 
-#STEP 7 ---------------------------------------------------------------------------------------
-#Log to value
+#STEP 7 y STEP 8 ---------------------------------------------------------------------------------------
+#Log to exp and show graphics
 def exp_linear_interpolation(log_energy, log_values, log_x_value, log_interpolated_value):
     exp_interpolated_value = np.exp(log_interpolated_value)
+    # Plotting
+    plt.figure(figsize=(8, 6))
+    plt.plot(log_energy, log_values, 'o', label='Data points', color='blue')
+    plt.plot(log_x_value, exp_interpolated_value, 'ro', label=f'Exp Interpolated value ({exp_interpolated_value:.2f})')
+    plt.plot(log_energy, np.exp(linear_interpolation(log_energy)), '-', color='gray',
+             label='Exponential Linear interpolation')
+    plt.xlabel("log_energy")
+    plt.ylabel("log_values")
+    plt.title("Exponential Linear Interpolation with Graph")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
     return exp_interpolated_value
+
+def exp_quadratic_interpolation(log_energy, log_values, log_x_value, log_quadratic_interpolated_value):
+    exp_quadratic_interpolated_value = np.exp(log_quadratic_interpolated_value)
+    return exp_quadratic_interpolated_value
+
+def exp_cubic_interpolation(log_energy, log_values, log_x_value, log_cubic_interpolated_value):
+    exp_cubic_interpolated_value = np.exp(log_cubic_interpolated_value)
+    return exp_cubic_interpolated_value
+
+def exp_akima_interpolation(log_energy, log_values, log_x_value, log_akima_interpolated_value):
+    exp_akima_interpolated_value = np.exp(log_akima_interpolated_value)
+    return exp_akima_interpolated_value
 
 #STEP 8 ---------------------------------------------------------------------------------------
 #Show graphics
