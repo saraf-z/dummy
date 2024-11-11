@@ -141,18 +141,55 @@ def exp_linear_interpolation(log_energy, log_values, log_x_value, log_interpolat
 
 def exp_quadratic_interpolation(log_energy, log_values, log_x_value, log_quadratic_interpolated_value):
     exp_quadratic_interpolated_value = np.exp(log_quadratic_interpolated_value)
+    # Plotting
+    plt.figure(figsize=(8, 6))
+    plt.plot(log_energy, log_values, 'o', label='Data points', color='blue')
+    plt.plot(log_x_value, exp_quadratic_interpolated_value, 'ro', label=f'Exp Interpolated value ({exp_interpolated_value:.2f})')
+    plt.plot(log_energy, np.exp(quadratic_interpolation(log_energy)), '-', color='gray',
+             label='Exponential Linear interpolation')
+    plt.xlabel("log_energy")
+    plt.ylabel("log_values")
+    plt.title("Exponential Linear Interpolation with Graph")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
     return exp_quadratic_interpolated_value
 
 def exp_cubic_interpolation(log_energy, log_values, log_x_value, log_cubic_interpolated_value):
     exp_cubic_interpolated_value = np.exp(log_cubic_interpolated_value)
+    # Plotting
+    plt.figure(figsize=(8, 6))
+    plt.plot(log_energy, log_values, 'o', label='Data points', color='blue')
+    plt.plot(log_x_value, exp_cubic_interpolated_value, 'ro',
+             label=f'Exp Interpolated value ({exp_cubic_interpolated_value:.2f})')
+    plt.plot(log_energy, np.exp(cubic_interpolation(log_energy)), '-', color='gray',
+             label='Exponential Linear interpolation')
+    plt.xlabel("log_energy")
+    plt.ylabel("log_values")
+    plt.title("Exponential Linear Interpolation with Graph")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
     return exp_cubic_interpolated_value
 
 def exp_akima_interpolation(log_energy, log_values, log_x_value, log_akima_interpolated_value):
     exp_akima_interpolated_value = np.exp(log_akima_interpolated_value)
+    # Plotting
+    plt.figure(figsize=(8, 6))
+    plt.plot(log_energy, log_values, 'o', label='Data points', color='blue')
+    plt.plot(log_x_value, exp_akima_interpolated_value, 'ro',
+             label=f'Exp Interpolated value ({exp_akima_interpolated_value:.2f})')
+    plt.plot(log_energy, np.exp(akima_interpolation(log_energy)), '-', color='gray',
+             label='Exponential Linear interpolation')
+    plt.xlabel("log_energy")
+    plt.ylabel("log_values")
+    plt.title("Exponential Linear Interpolation with Graph")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
     return exp_akima_interpolated_value
 
-#STEP 8 ---------------------------------------------------------------------------------------
-#Show graphics
+
 
 
 
